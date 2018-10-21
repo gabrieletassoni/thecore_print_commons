@@ -7,7 +7,6 @@ class Printer < ApplicationRecord
   validates :name, presence: true
   validates :ip, presence: true
   validates :temperature, presence: true
-  validates :print_template, presence: true
 
   # before_save :check_if_unique_default
   # validates :qty, presence: true, numericality: { only_integer: true, greater_than: 0 }
@@ -43,14 +42,12 @@ class Printer < ApplicationRecord
     config.model 'Printer' do
       navigation_label I18n.t("admin.settings.label")
       navigation_icon 'fa fa-print'
-      weight 11
 
       field :name
       field :ip
       field :default, :toggle
       field :temperature
       field :print_template
-      # field :used_in
       field :description
 
       list do

@@ -27,7 +27,6 @@ it:
         printed: Stampate
         total: Totale
         created_at: Orario
-        printed_on_total: Stampe Eseguite
       print_template:
         name: Nome
         description: Descrizione
