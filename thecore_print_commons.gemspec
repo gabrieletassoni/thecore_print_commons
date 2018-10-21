@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
 
   # s.add_dependency "rails", "~> 5.2.1"
     s.add_dependency 'thecore', '~> 1.4'
+    s.add_dependency 'thecore_background_jobs', '~> 1.1'
 end

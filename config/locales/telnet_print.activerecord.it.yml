@@ -1,0 +1,36 @@
+it:
+  activerecord:
+    models:
+      printer:
+        one: Stampante
+        other: Stampanti
+      print_job:
+        one: Lavoro di Stampa
+        other: Lavori di Stampa
+      print_template:
+        one: Modello di Stampa
+        other: Modelli di Stampa
+    attributes:
+      printer:
+        name: Nome
+        description: Descrizione
+        ip: Indirizzo IP
+        template: Modello di Stampa
+        qty: Quantità di Barcode Presenti nel Modello di Stampa
+        translation: Matrice di trasformazione
+        used_in: Da usare nella Sezione
+      print_job:
+        finished: Terminata?
+        printer: Stampante
+        iserror: Errore?
+        description: Descrizione
+        printed: Stampate
+        total: Totale
+        created_at: Orario
+        printed_on_total: Stampe Eseguite
+      print_template:
+        name: Nome
+        description: Descrizione
+        template: Modello ZPL
+        number_of_barcodes: Numero di Codici a Barre
+        translation_matrix: Matrice di Traduzione

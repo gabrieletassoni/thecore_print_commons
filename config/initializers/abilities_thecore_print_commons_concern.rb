@@ -14,6 +14,7 @@ module ThecorePrintCommonAbilitiesConcern
         if user.has_role? :role
             # a specific role, brings specific powers
         end
+        cannot [ :create, :update, :destroy, :show, :clone ], PrintJob
         end
     end
     end
