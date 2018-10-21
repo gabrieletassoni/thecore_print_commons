@@ -14,7 +14,7 @@ it:
       printer:
         name: Nome
         description: Descrizione
-        ip: Indirizzo IP
+        ip: Indirizzo
         template: Modello di Stampa
         qty: Quantità di Barcode Presenti nel Modello di Stampa
         translation: Matrice di trasformazione
@@ -30,6 +30,6 @@ it:
       print_template:
         name: Nome
         description: Descrizione
-        template: Modello ZPL
+        template: Modello di Stampa
         number_of_barcodes: Numero di Codici a Barre
         translation_matrix: Matrice di Traduzione
