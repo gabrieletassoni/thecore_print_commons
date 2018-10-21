@@ -3,15 +3,15 @@ class PrintWorker
     include Sidekiq::Worker
     def perform  printer, text
         # Checking status only for telnet printers, samba ones cannot be checked
-        is_telnet_printer? = IPAddr.new(printer).ipv4? rescue false
-        status = if is_telnet_printer?
+        is_telnet_printer = IPAddr.new(printer).ipv4? rescue false
+        status = if is_telnet_printer
             check_status(printer)
         else
             "OK"
         end 
         if status == "OK"
             begin
-                if is_telnet_printer?
+                if is_telnet_printer
                     # Use TCPSocket
                     TCPSocket.new(printer, 9100) do |s|
                         # Rails.logger.debug "TEMPERATURE: #{text}"
