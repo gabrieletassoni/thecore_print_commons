@@ -1,6 +1,9 @@
 class PrintTemplate < ApplicationRecord
   has_many :printers, inverse_of: :print_template
 
+  validates :name, presence: true
+  validates :template, presence: true
+
   # def translate args
   #   # Rails.logger.info("COME CAZZO SEI FATTO? #{args.inspect}")
   #   temp = template.clone
