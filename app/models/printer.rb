@@ -1,12 +1,8 @@
 class Printer < ApplicationRecord
   #serialize :translation, Hash
 
-  has_many :print_jobs, dependent: :destroy, inverse_of: :printer
-  belongs_to :print_template, inverse_of: :printers
-
   validates :name, presence: true
   validates :ip, presence: true
-  validates :temperature, presence: true
 
   # before_save :check_if_unique_default
   # validates :qty, presence: true, numericality: { only_integer: true, greater_than: 0 }
@@ -38,6 +34,11 @@ class Printer < ApplicationRecord
   #   where(used_in: (USED.index(section.to_sym) + 1))
   # end
 
+  def ip_enum
+    # Getting from CUPS the list of configured printers
+    CupsPrinter.get_all_printer_names
+  end
+
   RailsAdmin.config do |config|
     config.model 'Printer' do
       navigation_label I18n.t("admin.settings.label")
@@ -47,7 +48,6 @@ class Printer < ApplicationRecord
       field :ip
       field :default, :toggle
       field :temperature
-      field :print_template
       field :description
 
       list do
