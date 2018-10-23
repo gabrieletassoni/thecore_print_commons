@@ -1,13 +1,5 @@
 it:
- admin:
-  actions:
-   telnet_print:
-    title: "Stampa Barcode di Rete"
-    menu: "Stampa per %{model_label} '%{object_label}'"
-    breadcrumb: "Stampa Barcode"
-    link: "Stampa Barcode"
-    bulk_link: "Stampa barcode: %{model_label_plural}"
-    done: "Stampato"
-  used_in:
-    bundle: Sovracollo
-    commission: Barca (Commessa)
+  admin:
+    help:
+      print:
+        ip: '%{help}. Se questa lista è vuota, significa che devi ancora configurare una stampante in CUPS, ad esempio puoi farlo, per una stampante SMB, con un comando simile a questo: sudo lpadmin -p PrinterName -E -v smb://username:password_urlencoded@WORKGROUP/PRINTSERVER/PRINTER -m raw -L "LOCATION"'

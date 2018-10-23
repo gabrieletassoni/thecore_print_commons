@@ -1,11 +1,6 @@
-
 en:
   admin:
-    actions:
-      telnet_print:
-        title: "Telnet Print"
-        menu: "Telnet Print for %{model_label} '%{object_label}'"
-        breadcrumb: "Telnet Print"
-        link: "Telnet Print"
-        bulk_link: "Telnet Print selected %{model_label_plural}"
-        done: "Telnet Printed"
+    help:
+      print:
+        ip: '%{help}. If this select box is empty, it means you just need to configure a printer in CUPS. As an example, you could do it, for a SMB shared printer, running a command like this: sudo lpadmin -p PrinterName -E -v smb://username:password_urlencoded@WORKGROUP/PRINTSERVER/PRINTER -m raw -L "LOCATION"'
+

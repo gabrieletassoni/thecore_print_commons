@@ -18,7 +18,7 @@ it:
         template: Modello di Stampa
         qty: Quantità di Barcode Presenti nel Modello di Stampa
         translation: Matrice di trasformazione
-        used_in: Da usare nella Sezione
+        default: Attiva
       print_job:
         finished: Terminata?
         printer: Stampante
