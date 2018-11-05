@@ -13,7 +13,7 @@ Otherwise, if you prefere to go the shell way, you can add it using lpadmin, say
 First of all add current user to lpadmin group:
 
 ```shell
-sudo apt install cups libcups2-dev
+sudo apt install cups libcups2-dev gridsite-clients
 sudo adduser $(whoami) lpadmin
 newgrp lpadmin
 ```
@@ -27,7 +27,7 @@ echo "Printer ip or netbios address:";read SHARE_IP_ADDRESS_OR_NETBIOS_NAME;
 echo "Printer share name:";read SHARENAME;
 echo "Printer share username:"; read USERNAME;
 echo "Printer share password:"; read PASSWORD;
-lpadmin -p "$PRINTERLABEL" -v "smb://${USERNAME}:${PASSWORD}@${WORKGROUP}/${SHARE_IP_ADDRESS_OR_NETBIOS_NAME}/${SHARENAME}" -m raw
+lpadmin -p "$PRINTERLABEL" -v "smb://$(urlencode $USERNAME):$(urlencode $PASSWORD)@$(urlencode $WORKGROUP)/$(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME)/$(urlencode $SHARENAME)" -m raw
 ```
 
 ## Installation
