@@ -36,6 +36,13 @@ To list shares on that remote machine:
 smbclient -L $(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME) -U $(urlencode $USERNAME)%$(urlencode $PASSWORD) -W $(urlencode $WORKGROUP)
 ```
 
+To test from shell, prior to start using the rails ui:
+
+```shell
+echo "Hello" > testprint
+lp -d "$PRINTERLABEL" -o raw testprint
+```
+
 ## Installation
 First of all, please install libcups2-dev:
 
