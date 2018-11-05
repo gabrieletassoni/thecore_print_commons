@@ -8,6 +8,12 @@ the authentications needed for adding printers, to do so, please edit /etc/cups/
 
 When you enter the printers section and add a new printer in Thecore backend, you'll just see available (through cups) printers and you can just select one of these.
 
+Otherwise, if you prefere to go the shell way, you can add it using lpadmin, say you'd like to install a samba printer:
+
+```shell
+sudo lpadmin -p PRINTERLABEL -v smb://username:password@WORKGROUP/SHARE_IP_ADDRESS_OR_NETBIOS_NAME/printersharename -m raw
+```
+
 ## Installation
 First of all, please install libcups2-dev:
 
