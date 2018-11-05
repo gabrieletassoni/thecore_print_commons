@@ -10,8 +10,23 @@ When you enter the printers section and add a new printer in Thecore backend, yo
 
 Otherwise, if you prefere to go the shell way, you can add it using lpadmin, say you'd like to install a samba printer:
 
+First of all add current user to lpadmin group:
+
 ```shell
-sudo lpadmin -p PRINTERLABEL -v smb://username:password@WORKGROUP/SHARE_IP_ADDRESS_OR_NETBIOS_NAME/printersharename -m raw
+sudo adduser $(whoami) lpadmin
+newgrp lpadmin
+```
+
+Then you can use lpadmin commands without sudo:
+
+```shell
+echo "Printer label:"; read PRINTERLABEL;
+echo "Printer workgroup or Domain:";read WORKGROUP;
+echo "Printer ip or netbios address:";read SHARE_IP_ADDRESS_OR_NETBIOS_NAME;
+echo "Printer share name:";read SHARENAME;
+echo "Printer share username:"; read USERNAME;
+echo "Printer share password:"; read PASSWORD;
+lpadmin -p "$PRINTERLABEL" -v "smb://${USERNAME}:${PASSWORD}@${WORKGROUP}/${SHARE_IP_ADDRESS_OR_NETBIOS_NAME}/${SHARENAME}" -m raw
 ```
 
 ## Installation
