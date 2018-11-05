@@ -13,12 +13,12 @@ Otherwise, if you prefere to go the shell way, you can add it using lpadmin, say
 First of all add current user to lpadmin group:
 
 ```shell
-sudo apt install cups libcups2-dev gridsite-clients
+sudo apt install cups libcups2-dev gridsite-clients smbclient
 sudo adduser $(whoami) lpadmin
 newgrp lpadmin
 ```
 
-Then you can use lpadmin commands without sudo:
+Then you can use lpadmin commands without sudo (example for samba shared printer, must be adapted for other protocols):
 
 ```shell
 echo "Printer label:"; read PRINTERLABEL;
