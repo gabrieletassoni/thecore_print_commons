@@ -27,7 +27,7 @@ echo "Printer ip or netbios address:";read SHARE_IP_ADDRESS_OR_NETBIOS_NAME;
 echo "Printer share name:";read SHARENAME;
 echo "Printer share username:"; read USERNAME;
 echo "Printer share password:"; read PASSWORD;
-lpadmin -p "$PRINTERLABEL" -v "smb://$(urlencode $USERNAME):$(urlencode $PASSWORD)@$(urlencode $WORKGROUP)/$(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME)/$(urlencode $SHARENAME)" -m raw
+lpadmin -p "$PRINTERLABEL" -E -v "smb://$(urlencode $USERNAME):$(urlencode $PASSWORD)@$(urlencode $WORKGROUP)/$(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME)/$(urlencode $SHARENAME)" -m raw
 ```
 
 To list shares on that remote machine:
