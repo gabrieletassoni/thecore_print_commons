@@ -13,7 +13,7 @@ Otherwise, if you prefere to go the shell way, you can add it using lpadmin, say
 First of all add current user to lpadmin group:
 
 ```shell
-sudo apt install cups
+sudo apt install cups libcups2-dev
 sudo adduser $(whoami) lpadmin
 newgrp lpadmin
 ```
