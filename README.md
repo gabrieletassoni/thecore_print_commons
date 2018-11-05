@@ -30,6 +30,12 @@ echo "Printer share password:"; read PASSWORD;
 lpadmin -p "$PRINTERLABEL" -v "smb://$(urlencode $USERNAME):$(urlencode $PASSWORD)@$(urlencode $WORKGROUP)/$(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME)/$(urlencode $SHARENAME)" -m raw
 ```
 
+To list shares on that remote machine:
+
+```shell
+smbclient -L $(urlencode $SHARE_IP_ADDRESS_OR_NETBIOS_NAME) -U $(urlencode $USERNAME)%$(urlencode $PASSWORD) -W $(urlencode $WORKGROUP)
+```
+
 ## Installation
 First of all, please install libcups2-dev:
 
