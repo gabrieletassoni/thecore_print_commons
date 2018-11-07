@@ -36,7 +36,13 @@ class Printer < ApplicationRecord
 
   def ip_enum
     # Getting from CUPS the list of configured printers
-    CupsPrinter.get_all_printer_names
+    if Settings.ns(:printer_commons).cups_server.blank? || ['127.0.0.1', 'localhost'].include?(Settings.ns(:printer_commons).cups_server)
+      # Local Cups server
+      CupsPrinter.get_all_printer_names
+    else
+      # Remote Cups server
+      CupsPrinter.get_all_printer_names hostname: Settings.ns(:printer_commons).cups_server
+    end 
   end
 
   RailsAdmin.config do |config|
