@@ -9,8 +9,9 @@ class PrintWorker
                 CupsPrinter.new printer_cups_name, hostname: Settings.ns(:printer_commons).cups_server
             end
             printer.print_data text, 'text/plain'
-        rescue
-            Rails.logger.debug("PRINTER #{printer_cups_name} ERROR: TIMEOUT")
+        rescue => error
+            Rails.logger.debug("PRINTER #{printer_cups_name} ERROR: #{$!.message}")
+            Rails.logger.debug($!.backtrace)
         end
     end
 end
