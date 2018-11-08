@@ -2,16 +2,17 @@ require 'ipaddr'
 class PrintWorker
     include Sidekiq::Worker
     def perform printer_cups_name, text
-        begin
-            printer = if Settings.ns(:printer_commons).cups_server.blank? || ['127.0.0.1', 'localhost'].contains(Settings.ns(:printer_commons).cups_server)
-                CupsPrinter.new printer_cups_name
-            else
-                CupsPrinter.new printer_cups_name, hostname: Settings.ns(:printer_commons).cups_server
-            end
-            printer.print_data text, 'text/plain'
-        rescue => error
-            Rails.logger.debug("PRINTER #{printer_cups_name} ERROR: #{$!.message}")
-            Rails.logger.debug($!.backtrace)
-        end
+        # if Settings.ns(:printer_commons).cups_server.blank? || ['127.0.0.1', 'localhost'].contains(Settings.ns(:printer_commons).cups_server)
+        #     printer = CupsPrinter.new printer_cups_name
+        #     printer.print_data text, 'text/plain'
+        #     printer.close
+        # else
+        print_file = "/tmp/print-#{printer_cups_name}-#{Time.now.strftime '%Y%m%d%H%M%S%L'}"
+        IO.write(print_file, text)
+        # CupsPrinter.new printer_cups_name, hostname: Settings.ns(:printer_commons).cups_server
+        # printer.print_data text, 'text/plain', hostname: Settings.ns(:printer_commons).cups_server
+        `lp -d "#{printer_cups_name}" -h "#{Settings.ns(:printer_commons).cups_server}" -o raw "#{print_file}"`
+        File.delete print_file
+        # end
     end
 end
