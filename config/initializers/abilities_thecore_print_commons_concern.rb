@@ -1,10 +1,7 @@
-
-require 'active_support/concern'
-
-module ThecorePrintCommonAbilitiesConcern
-    extend ActiveSupport::Concern
-    included do
-        def thecore_print_commons_abilities user
+module Abilities
+    class ThecorePrintCommon
+        include CanCan::Ability
+        def initialize user
             if user
                 # if the user is logged in, it can do certain tasks regardless his role
                 if user.admin?
@@ -19,5 +16,5 @@ module ThecorePrintCommonAbilitiesConcern
     end
 end
 
-# include the extension
-TheCoreAbilities.send(:include, ThecorePrintCommonAbilitiesConcern)
+# # include the extension
+# TheCoreAbilities.send(:include, ThecorePrintCommonAbilitiesConcern)
