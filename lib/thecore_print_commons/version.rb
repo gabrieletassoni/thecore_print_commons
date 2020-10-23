@@ -1,3 +1,3 @@
 module ThecorePrintCommons
-  VERSION = '0.1.16'.freeze
+  VERSION = '2.0'.freeze
 end
