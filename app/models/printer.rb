@@ -1,8 +1,7 @@
 class Printer < ApplicationRecord
+  include Api::Printer
+  include RailsAdmin::Printer
   #serialize :translation, Hash
-
-  validates :name, presence: true
-  validates :ip, presence: true
 
   # before_save :check_if_unique_default
   # validates :qty, presence: true, numericality: { only_integer: true, greater_than: 0 }
@@ -34,35 +33,25 @@ class Printer < ApplicationRecord
   #   where(used_in: (USED.index(section.to_sym) + 1))
   # end
 
-  def ip_enum
-    # Getting from CUPS the list of configured printers
-    if Settings.ns(:printer_commons).cups_server.blank? || ['127.0.0.1', 'localhost'].include?(Settings.ns(:printer_commons).cups_server)
-      # Local Cups server
-      CupsPrinter.get_all_printer_names
-    else
-      # Remote Cups server
-      CupsPrinter.get_all_printer_names hostname: Settings.ns(:printer_commons).cups_server
-    end 
-  end
+  # Usable with CUPS (STUB)
+  # def ip_enum
+  #   # Getting from CUPS the list of configured printers
+  #   if Settings.ns(:printer_commons).cups_server.blank? || ['127.0.0.1', 'localhost'].include?(Settings.ns(:printer_commons).cups_server)
+  #     # Local Cups server
+  #     CupsPrinter.get_all_printer_names
+  #   else
+  #     # Remote Cups server
+  #     CupsPrinter.get_all_printer_names hostname: Settings.ns(:printer_commons).cups_server
+  #   end 
+  # end
 
-  RailsAdmin.config do |config|
-    config.model 'Printer' do
-      navigation_label I18n.t("admin.settings.label")
-      navigation_icon 'fa fa-print'
+  belongs_to :print_template, inverse_of: :printers
 
-      field :name
-      field :ip
-      field :default, :toggle
-      field :temperature
-      field :description
+  validates :name, presence: true
+  validates :ip, presence: true
+  validates :port, presence: true
 
-      list do
-        configure :description do
-          visible false
-        end
-      end
-    end
-  end
+  
   # private
   # def check_if_unique_default
   #   if self.default?

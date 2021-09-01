@@ -1,5 +1,5 @@
 require 'thecore_background_jobs'
-require 'cupsffi'
+# require 'cupsffi'
 require "thecore_print_commons/engine"
 
 module ThecorePrintCommons
