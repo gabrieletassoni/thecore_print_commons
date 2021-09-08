@@ -27,7 +27,7 @@ module Api::Printer
         #     { test: [ :first, :second, :third ], id: id, params: params}
         # end
 
-        def self.custom_action_print_single_barcode id, barcode
+        def self.custom_action_print_single_barcode id, params
             # Example Usage:
             # item = ::Item.joins(:projects).where(projects: {id: params[:order_id].to_i}).first
             # printer = ::Printer.where(supplier_id: current_user.supplier_id, default: true).first
@@ -37,7 +37,7 @@ module Api::Printer
             # ::PrintWorker.perform_async(printer.ip, text)
 
             printer = Printer.find(id)
-            text = printer.print_template.template.gsub(printer.print_template.translation_matrix.lines.first, barcode)
+            text = printer.print_template.template.gsub(printer.print_template.translation_matrix.lines.first, params[:barcode])
             ::PrintWorker.perform_async(printer.ip, printer.port, text)
             { info: "Print job sent in background to #{printer.ip} on port #{printer.port}" }
         end
