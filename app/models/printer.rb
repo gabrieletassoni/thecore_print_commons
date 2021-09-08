@@ -46,10 +46,12 @@ class Printer < ApplicationRecord
   # end
 
   belongs_to :print_template, inverse_of: :printers
+  has_many :print_jobs, dependent: :destroy, inverse_of: :printer
 
   validates :name, presence: true
   validates :ip, presence: true
   validates :port, presence: true
+  validates :print_template, presence: true
 
   
   # private

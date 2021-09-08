@@ -1,4 +1,4 @@
-module Api::Printer
+module Api::PrintJob
     extend ActiveSupport::Concern
     
     included do
@@ -26,20 +26,5 @@ module Api::Printer
         # def self.custom_action_test id=nil, params=nil
         #     { test: [ :first, :second, :third ], id: id, params: params}
         # end
-
-        def self.custom_action_print_single_barcode id, barcode
-            # Example Usage:
-            # item = ::Item.joins(:projects).where(projects: {id: params[:order_id].to_i}).first
-            # printer = ::Printer.where(supplier_id: current_user.supplier_id, default: true).first
-            # single_text = "#{printer.print_template.template.gsub("%DESCRIPTION%", item.description)}"
-            # text = single_text * params[:quantity].to_i
-            # # Preso l'ordine mi recupero l'item e ne stampo la quantità richiesta
-            # ::PrintWorker.perform_async(printer.ip, text)
-
-            printer = Printer.find(id)
-            text = printer.print_template.template.gsub(printer.print_template.translation_matrix.lines.first, barcode)
-            ::PrintWorker.perform_async(printer.ip, printer.port, text)
-            { info: "Print job sent in background to #{printer.ip} on port #{printer.port}" }
-        end
     end
 end
