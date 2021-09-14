@@ -2,11 +2,11 @@ class Printer < ApplicationRecord
   include Api::Printer
   include RailsAdmin::Printer
   #serialize :translation, Hash
-
+  
   # before_save :check_if_unique_default
   # validates :qty, presence: true, numericality: { only_integer: true, greater_than: 0 }
   # validates :translation, presence: true
-
+  
   # def template_enum
   #   PrintTemplate.descendants
   # end
@@ -32,7 +32,7 @@ class Printer < ApplicationRecord
   # def self.assigned_to section
   #   where(used_in: (USED.index(section.to_sym) + 1))
   # end
-
+  
   # Usable with CUPS (STUB)
   # def ip_enum
   #   # Getting from CUPS the list of configured printers
@@ -44,15 +44,26 @@ class Printer < ApplicationRecord
   #     CupsPrinter.get_all_printer_names hostname: Settings.ns(:printer_commons).cups_server
   #   end 
   # end
-
+  
   belongs_to :print_template, inverse_of: :printers
   has_many :print_jobs, dependent: :destroy, inverse_of: :printer
-
+  
   validates :name, presence: true
   validates :ip, presence: true
   validates :port, presence: true
   validates :print_template, presence: true
-
+  
+  def online?
+    begin
+      s = TCPSocket.new(self.ip, 9100)
+      s.puts("~hs")
+      s.close
+    rescue
+      return false
+    end
+    true
+  end
+  
   
   # private
   # def check_if_unique_default
