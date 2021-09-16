@@ -55,9 +55,7 @@ class Printer < ApplicationRecord
   
   def online?
     begin
-      s = TCPSocket.new(self.ip, 9100)
-      s.puts("~hs")
-      s.close
+      Socket.tcp(self.ip, 9100, connect_timeout: 0.5).close
     rescue
       return false
     end
