@@ -2,7 +2,7 @@ require 'ipaddr'
 require 'socket'
 class PrintWorker
     include Sidekiq::Worker
-    sidekiq_options retry: false
+    sidekiq_options retry: false, queue: "#{ENV["COMPOSE_PROJECT_NAME"]}_default"
     
     # ZPL print
     def perform ip, port, text
