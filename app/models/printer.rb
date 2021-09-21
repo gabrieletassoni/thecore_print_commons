@@ -55,18 +55,11 @@ class Printer < ApplicationRecord
   
   def online?
     begin
-      Socket.tcp(self.ip, 9100, connect_timeout: 0.5).close
+      Socket.tcp(self.ip, self.port, connect_timeout: 0.5).close
     rescue
       return false
     end
     true
   end
-  
-  
-  # private
-  # def check_if_unique_default
-  #   if self.default?
-  #     Printer.where.not(id: self.id)
-  #   end
-  # end
+
 end
