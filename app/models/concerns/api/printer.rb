@@ -34,11 +34,14 @@ module Api::Printer
             # single_text = "#{printer.print_template.template.gsub("%DESCRIPTION%", item.description)}"
             # text = single_text * params[:quantity].to_i
             # # Preso l'ordine mi recupero l'item e ne stampo la quantità richiesta
-            # ::PrintWorker.perform_async(printer.ip, text)
+            # ::PrintWorker.perform_async('192.168.0.1', 9100, "We all love DJ")
 
             printer = Printer.find(params[:id])
-            text = printer.print_template.template.gsub(printer.print_template.translation_matrix.lines.first, params[:barcode])
-            ::PrintWorker.perform_async(printer.ip, printer.port, text)
+            base_template = printer.print_template.template.dup
+            result = printer.print_template.translation_matrix.lines.map(&:strip).inject(base_template) do |base_template, replacement|
+                base_template.gsub("$#{replacement}", params[replacement]) unless replacement.blank? && params[replacement].blank?
+            end
+            ::PrintWorker.perform_async(printer.ip, printer.port, result)
             { info: "Print job sent in background to #{printer.ip} on port #{printer.port}" }
         end
 
