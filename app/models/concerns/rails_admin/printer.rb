@@ -17,7 +17,7 @@ module RailsAdmin::Printer
             field :default, :toggle
             field :temperature
             field :description
-            field :online? do
+            field :is_online do
                 read_only true
                 formatted_value do # used in form views
                     (value ? "<strong style='color:green'>👍</strong>" : "<strong style='color:red'>👎</strong>").html_safe

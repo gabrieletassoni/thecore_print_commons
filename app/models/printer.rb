@@ -9,7 +9,7 @@ class Printer < ApplicationRecord
   validates :port, presence: true
   validates :print_template, presence: true
   
-  def online?
+  def is_online
     begin
       Socket.tcp(self.ip, self.port, connect_timeout: 0.5).close
     rescue
