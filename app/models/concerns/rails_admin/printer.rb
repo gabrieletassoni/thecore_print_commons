@@ -6,8 +6,8 @@ module RailsAdmin::Printer
             navigation_label I18n.t("admin.settings.label")
             navigation_icon 'fa fa-print'
             
-            field :print_template
             field :name
+            field :print_template
             field :ip
             field :port do
                 default_value do
@@ -15,8 +15,17 @@ module RailsAdmin::Printer
                 end
             end
             field :default, :toggle
-            field :temperature
-            field :description
+            
+            show do
+                field :temperature
+                field :description
+            end
+            
+            edit do
+                field :temperature
+                field :description
+            end
+
             field :is_online do
                 read_only true
                 formatted_value do # used in form views
@@ -29,15 +38,6 @@ module RailsAdmin::Printer
                 
                 export_value do
                     value ? "OK" : "KO" # used in exports, where no html/data is allowed
-                end
-            end
-            
-            list do
-                configure :description do
-                    visible false
-                end
-                configure :temperature do
-                    visible false
                 end
             end
         end
