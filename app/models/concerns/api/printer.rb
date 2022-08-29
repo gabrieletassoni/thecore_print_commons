@@ -2,7 +2,7 @@ module Api::Printer
     extend ActiveSupport::Concern
     
     included do
-        # Use @@json_attrs to drive json rendering for 
+        # Use self.json_attrs to drive json rendering for 
         # API model responses (index, show and update ones).
         # For reference:
         # https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html
@@ -12,7 +12,9 @@ module Api::Printer
         # - methods: include the result of some method defined in the model
         # - include: include associated models, it's an object {} which also accepts the keys described here
         cattr_accessor :json_attrs
-        @@json_attrs = ::ModelDrivenApi.smart_merge (json_attrs || {}), {}
+        self.json_attrs = ::ModelDrivenApi.smart_merge (json_attrs || {}), {
+            methods: [ :is_online ]
+        }
         
         # Here you can add custom actions to be called from the API
         # The action must return an serializable (JSON) object.
