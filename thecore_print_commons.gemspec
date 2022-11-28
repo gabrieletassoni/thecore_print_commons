@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_dependency 'thecore_background_jobs', '~> 2.2'
+  s.add_dependency 'thecore_background_jobs', '~> 3.0'
   # s.add_dependency 'cupsffi', '~> 0.1'
 end
