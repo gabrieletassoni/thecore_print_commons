@@ -1,6 +1,6 @@
-class CreatePrinters < ActiveRecord::Migration[4.2]
+class CreatePrinters < ActiveRecord::Migration[7.0]
   def change
-    create_table :printers do |t|
+    create_table :printers, if_not_exists: true do |t|
       t.string :name
       t.text :description
       t.string :ip
@@ -10,8 +10,8 @@ class CreatePrinters < ActiveRecord::Migration[4.2]
 
       t.timestamps null: false
     end
-    add_index :printers, :name
-    add_index :printers, :description
-    add_index :printers, :ip
+    add_index :printers, :name, if_not_exists: true
+    add_index :printers, :description, if_not_exists: true
+    add_index :printers, :ip, if_not_exists: true
   end
 end
