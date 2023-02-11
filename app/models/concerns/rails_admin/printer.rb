@@ -14,7 +14,12 @@ module RailsAdmin::Printer
                     9100
                 end
             end
-            field :default, :toggle
+            
+            if Object.const_defined?('RailsAdminToggleable')
+                field :default, :toggle
+            else
+                field :default
+            end
             
             show do
                 field :temperature
@@ -25,7 +30,7 @@ module RailsAdmin::Printer
                 field :temperature
                 field :description
             end
-
+            
             field :is_online do
                 read_only true
                 formatted_value do # used in form views
