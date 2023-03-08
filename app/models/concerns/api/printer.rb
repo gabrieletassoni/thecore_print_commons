@@ -44,7 +44,7 @@ module Api::Printer
                 base_template.gsub("$#{replacement}", params[replacement]) unless replacement.blank? && params[replacement].blank?
             end if printer.print_template.translation_matrix.present?
             ::PrintWorker.perform_async(printer.ip, printer.port, result)
-            { info: "Print job sent in background to #{printer.ip} on port #{printer.port}" }
+            return { info: "Print job sent in background to #{printer.ip} on port #{printer.port}" }, 200
         end
     end
 end
