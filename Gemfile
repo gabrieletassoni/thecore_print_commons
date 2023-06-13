@@ -7,4 +7,4 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem 'sqlite3'
-gem 'thecore_background_jobs', '~> 2.0'
+gem 'thecore_background_jobs', '~> 3.0'
