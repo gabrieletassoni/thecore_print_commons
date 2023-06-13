@@ -40,7 +40,6 @@ jobs:
         version=$(grep -oP 'VERSION = "\K[^"]+' lib/*/version.rb | awk -F'.' '{print $1"."$2"."$3}')
         git tag -a $version -m "Version $version"
         git push --tags
-        
     - name: Publish to RubyGems
       if: env.version_exists == 'false'
       run: |
