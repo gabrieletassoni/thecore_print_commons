@@ -29,7 +29,9 @@ class Endpoints::Printer < NonCrudEndpoints
                         "application/json": {
                             schema: {
                                 type: "object",
-                                additionalProperties: true
+                                properties: {
+                                    info: { type: "string" }
+                                }
                             }
                         }
                     }
