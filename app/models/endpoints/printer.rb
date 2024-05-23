@@ -1,5 +1,5 @@
 class Endpoints::Printer < NonCrudEndpoints
-    self.desc :print_single_barcode, {
+    self.desc 'Printer', :print_single_barcode, {
         post: {
             summary: "Print a single barcode",
             description: "Print a single barcode",
