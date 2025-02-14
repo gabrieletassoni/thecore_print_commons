@@ -3,7 +3,7 @@ module RailsAdmin::PrintTemplate
     included do
         # Here You can define the RailsAdmin DSL
         rails_admin do
-            navigation_label I18n.t("admin.settings.label")
+            navigation_label Proc.new{I18n.t("admin.settings.label")}
             navigation_icon 'fa fa-file-text'
             parent Printer
             
