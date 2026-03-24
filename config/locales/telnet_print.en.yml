@@ -2,4 +2,38 @@ en:
   admin:
     help:
       print_template:
-        translation_matrix: 
+        translation_matrix: "Translation Matrix"
+  activerecord:
+    models:
+      printer:
+        one: Printer
+        other: Printers
+      print_job:
+        one: Print Job
+        other: Print Jobs
+      print_template:
+        one: Print Template
+        other: Print Templates
+    attributes:
+      printer:
+        name: Name
+        description: Description
+        ip: Address
+        template: Print Template
+        qty: Number of Barcodes in Template
+        translation: Transformation Matrix
+        default: Active
+      print_job:
+        finished: Finished?
+        printer: Printer
+        iserror: Error?
+        description: Description
+        printed: Printed
+        total: Total
+        created_at: Time
+      print_template:
+        name: Name
+        description: Description
+        template: Print Template
+        number_of_barcodes: Number of Barcodes
+        translation_matrix: Translation Matrix
