@@ -23,6 +23,10 @@ en:
         qty: Number of Barcodes in Template
         translation: Transformation Matrix
         default: Active
+        temperature: Temperature
+        print_template: Print Template
+        port: Port
+        plant: Plant
       print_job:
         finished: Finished?
         printer: Printer

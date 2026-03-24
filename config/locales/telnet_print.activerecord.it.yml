@@ -19,6 +19,10 @@ it:
         qty: Quantità di Barcode Presenti nel Modello di Stampa
         translation: Matrice di trasformazione
         default: Attiva
+        temperature: Temperatura
+        print_template: Modello di Stampa
+        port: Porta
+        plant: Impianto
       print_job:
         finished: Terminata?
         printer: Stampante
